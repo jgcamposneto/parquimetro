@@ -26,7 +26,7 @@ public class Veiculo {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     private String placa;
 
     @OneToMany(mappedBy = "veiculo", fetch = FetchType.EAGER)

@@ -30,6 +30,9 @@ public class Estacionamento {
 
     private LocalDateTime saida;
 
+    @Column(name = "documento_condutor")
+    private String documentoDoCondutor;
+
     public Estacionamento setId(UUID id) {
         this.id = id;
         return this;
@@ -47,6 +50,11 @@ public class Estacionamento {
 
     public Estacionamento setSaida(LocalDateTime saida) {
         this.saida = saida;
+        return this;
+    }
+
+    public Estacionamento setDocumentoDoCondutor(String documentoDoCondutor) {
+        this.documentoDoCondutor = documentoDoCondutor;
         return this;
     }
 
