@@ -33,8 +33,13 @@ public class VeiculoController {
     private Validator validator;
 
     @GetMapping
-    public ResponseEntity<Page<DadosDetalhamentoVeiculoDTO>> listar(@PageableDefault(size = 10, sort = {"placa"}) Pageable paginacao) {
-        return ResponseEntity.ok(veiculoService.findAll(paginacao).map(DadosDetalhamentoVeiculoDTO::new));
+    public ResponseEntity<Page<DadosDetalhamentoVeiculoDTO>> listar(
+            @PageableDefault(size = 10, sort = {"placa"}) Pageable paginacao
+            ) {
+        return ResponseEntity
+                .ok(veiculoService
+                        .findAll(paginacao)
+                        .map(DadosDetalhamentoVeiculoDTO::new));
     }
 
     @GetMapping("{id}")

@@ -23,14 +23,12 @@ public class VeiculoService {
 
     @Cacheable("veiculos")
     public Veiculo findById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Veículo não encontrado"));
+        return repository
+                .findById(id)
+                .orElseThrow(() -> new ControllerNotFoundException("Veículo não encontrado"));
     }
 
     public Veiculo save(Veiculo veiculo) {
-        return repository.save(veiculo);
-    }
-
-    public Veiculo update(UUID id, Veiculo veiculo) {
         return repository.save(veiculo);
     }
 
@@ -38,4 +36,7 @@ public class VeiculoService {
             repository.deleteById(id);
     }
 
+    public boolean existsById(UUID uuid) {
+        return repository.existsById(uuid);
+    }
 }

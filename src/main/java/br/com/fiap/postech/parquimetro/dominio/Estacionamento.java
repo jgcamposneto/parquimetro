@@ -61,8 +61,8 @@ public class Estacionamento {
     public Duracao calcularTempoDeEstacionamento() {
         Duration between = Duration.between(entrada, saida);
         long horas = between.toHours();
-        long minutos = between.toMinutes() % between.toHours();
-        long segundos = between.toSeconds() % between.toMinutes();
+        long minutos = horas == 0 ? between.toMinutes() : between.toMinutes() % between.toHours();
+        long segundos = between.toMinutes() == 0 ? between.toSeconds() : between.toSeconds() % between.toMinutes();
         return new Duracao().setHoras(horas).setMinutos(minutos).setSegundos(segundos);
     }
 }
