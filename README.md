@@ -10,4 +10,8 @@ e saída do estacionamento.
     - Classe `java.time.Duration` para calcular as medidas de tempo do estacionamento,
 como horas, minutos e segundos.
 
-**2. ** 
+**2. Implemente uma estrutura de persistência de dados eficiente. Utilize um banco
+de dados (pode ser em memória ou físico, SQL ou NoSQL), para armazenar as informações
+sobre os veículos estacionados. Isso permitirá um acesso rápido e confiável dos dados.**
+- Solução:
+  - Utilização de banco de dados Postgresql, acessado na API através de Spring Data.  
