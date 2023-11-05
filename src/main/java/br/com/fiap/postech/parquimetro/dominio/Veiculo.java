@@ -2,7 +2,7 @@ package br.com.fiap.postech.parquimetro.dominio;
 
 import br.com.fiap.postech.parquimetro.dto.DadosAtualizacaoVeiculoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosCadastroVeiculoDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoVeiculoDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -33,6 +33,11 @@ public class Veiculo {
     @JsonManagedReference
     private List<Estacionamento> estacionamentos = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
+    @JoinColumn(name = "condutor.id")
+    private Condutor condutor;
+
     public Veiculo(DadosCadastroVeiculoDTO dto) {
         this.placa = dto.placa();
     }
@@ -44,6 +49,11 @@ public class Veiculo {
 
     public Veiculo setPlaca(String placa) {
         this.placa = placa;
+        return this;
+    }
+
+    public Veiculo setCondutor(Condutor condutor) {
+        this.condutor = condutor;
         return this;
     }
 

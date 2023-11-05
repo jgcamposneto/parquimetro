@@ -43,7 +43,7 @@ public class EstacionamentoService {
     public DadosDetalhamentoEstacionamentoDTO registrar(DadosRegistroEstacionamentoDTO dados) {
 
         if(!veiculoService.existsById(dados.idVeiculo())) {
-            throw new ValidacaoException("Id do veículo informado não existe.");
+            throw new ValidacaoException("Veículo informado não existe.");
         }
 
         validadores.forEach(v -> v.validar(dados));

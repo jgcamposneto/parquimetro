@@ -6,11 +6,12 @@ import java.util.UUID;
 
 public record DadosDetalhamentoVeiculoDTO(
         UUID id,
-        String placa
+        String placa,
+        UUID idCondutor
 ) {
 
     public DadosDetalhamentoVeiculoDTO(Veiculo veiculo) {
-        this(veiculo.getId(), veiculo.getPlaca());
+        this(veiculo.getId(), veiculo.getPlaca(), veiculo.getCondutor().getId());
     }
 
 }
