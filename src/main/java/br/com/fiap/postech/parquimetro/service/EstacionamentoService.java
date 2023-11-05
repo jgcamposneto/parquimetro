@@ -43,7 +43,7 @@ public class EstacionamentoService {
     public DadosDetalhamentoEstacionamentoDTO registrar(DadosRegistroEstacionamentoDTO dados) {
 
         if(!veiculoService.existsById(dados.idVeiculo())) {
-            throw new ValidacaoException("Veículo informado não existe.");
+            throw new ValidacaoException("Veículo informado não está cadastrado.");
         }
 
         validadores.forEach(v -> v.validar(dados));
@@ -53,9 +53,8 @@ public class EstacionamentoService {
         var estacionamento =
                 new Estacionamento()
                         .setEntrada(dados.entrada())
-                        .setSaida(dados.saida())
                         .setVeiculo(veiculo)
-                        .setDocumentoDoCondutor(dados.documentoDoCondutor());
+                        .setDuracao(dados.duracao());
 
         repository.save(estacionamento);
 

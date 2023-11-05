@@ -28,10 +28,7 @@ public class Estacionamento {
 
     private LocalDateTime entrada;
 
-    private LocalDateTime saida;
-
-    @Column(name = "documento_condutor")
-    private String documentoDoCondutor;
+    private Integer duracao;
 
     public Estacionamento setId(UUID id) {
         this.id = id;
@@ -48,21 +45,8 @@ public class Estacionamento {
         return this;
     }
 
-    public Estacionamento setSaida(LocalDateTime saida) {
-        this.saida = saida;
+    public Estacionamento setDuracao(Integer duracao) {
+        this.duracao = duracao;
         return this;
-    }
-
-    public Estacionamento setDocumentoDoCondutor(String documentoDoCondutor) {
-        this.documentoDoCondutor = documentoDoCondutor;
-        return this;
-    }
-
-    public Duracao calcularTempoDeEstacionamento() {
-        Duration between = Duration.between(entrada, saida);
-        long horas = between.toHours();
-        long minutos = horas == 0 ? between.toMinutes() : between.toMinutes() % between.toHours();
-        long segundos = between.toMinutes() == 0 ? between.toSeconds() : between.toSeconds() % between.toMinutes();
-        return new Duracao().setHoras(horas).setMinutos(minutos).setSegundos(segundos);
     }
 }

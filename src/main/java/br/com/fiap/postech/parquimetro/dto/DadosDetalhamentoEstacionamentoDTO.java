@@ -9,18 +9,15 @@ import java.util.UUID;
 public record DadosDetalhamentoEstacionamentoDTO(
         UUID id,
         LocalDateTime entrada,
-        LocalDateTime saida,
-        String documentoDoCondutor,
-        UUID idVeiculo,
-        Duracao duracao) {
+        int duracao,
+        UUID idVeiculo
+        ) {
 
     public DadosDetalhamentoEstacionamentoDTO(Estacionamento estacionamento) {
         this(estacionamento.getId(),
                 estacionamento.getEntrada(),
-                estacionamento.getSaida(),
-                estacionamento.getDocumentoDoCondutor(),
-                estacionamento.getVeiculo().getId(),
-                estacionamento.calcularTempoDeEstacionamento());
+                estacionamento.getDuracao(),
+                estacionamento.getVeiculo().getId());
     }
 
 }
