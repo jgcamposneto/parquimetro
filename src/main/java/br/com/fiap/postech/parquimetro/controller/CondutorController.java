@@ -1,10 +1,7 @@
 package br.com.fiap.postech.parquimetro.controller;
 
 import br.com.fiap.postech.parquimetro.dominio.Condutor;
-import br.com.fiap.postech.parquimetro.dto.DadosCadastroCondutorDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosCadastroVeiculoDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoCondutorDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoVeiculoDTO;
+import br.com.fiap.postech.parquimetro.dto.*;
 import br.com.fiap.postech.parquimetro.service.CondutorService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
@@ -48,6 +45,13 @@ public class CondutorController {
         return ResponseEntity.ok(dto);
     }
 
+    @PutMapping("{id}/formapagamentopreferida")
+    public ResponseEntity atualizarFormaDePagamentoPreferida(
+            @PathVariable(value = "id") UUID id,
+            @RequestBody @Valid DadosAtualizacaoFormaPagamentoDTO dados) {
+        var dto = condutorService.atualizarFormaPagamento(id, dados);
+        return ResponseEntity.ok(dto);
+    }
 
     private <T> Map<Path, String> validar(T form) {
         var violacoes = validator.validate(form);

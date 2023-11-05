@@ -3,10 +3,7 @@ package br.com.fiap.postech.parquimetro.dominio;
 import br.com.fiap.postech.parquimetro.dto.DadosCadastroCondutorDTO;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +23,15 @@ public class Condutor {
 
     private String nome;
 
-
     @Embedded
     private Endereco endereco;
 
     private String contato;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Setter
+    @Column(name = "forma_pagamento")
+    private FormaDePagamento formaDePagamento;
 
     @OneToMany(mappedBy = "condutor", fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -45,5 +46,4 @@ public class Condutor {
     public void addVeiculo(Veiculo veiculo) {
         this.veiculos.add(veiculo);
     }
-
 }

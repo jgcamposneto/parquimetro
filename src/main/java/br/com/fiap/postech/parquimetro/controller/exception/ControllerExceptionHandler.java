@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -78,6 +79,20 @@ public class ControllerExceptionHandler {
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
         DadosErroValidacao dadosErroValidacao = new DadosErroValidacao("", "Entidade já cadastrada.");
+        ArrayList<DadosErroValidacao> dadosErroValidacoes = new ArrayList<>();
+        dadosErroValidacoes.add(dadosErroValidacao);
+        error.setErrors(dadosErroValidacoes);
+        error.setMessage(exception.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(this.error);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<DefaultError> entity(HttpMessageNotReadableException exception, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        DadosErroValidacao dadosErroValidacao = new DadosErroValidacao("", "Formato de dados informado é inválido.");
         ArrayList<DadosErroValidacao> dadosErroValidacoes = new ArrayList<>();
         dadosErroValidacoes.add(dadosErroValidacao);
         error.setErrors(dadosErroValidacoes);
