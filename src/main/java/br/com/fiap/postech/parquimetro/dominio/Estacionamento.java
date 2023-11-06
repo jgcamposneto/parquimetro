@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Getter
@@ -28,7 +28,7 @@ public class Estacionamento {
 
     private LocalDateTime entrada;
 
-    private Integer duracao;
+    private int duracaoContratadaEmHoras;
 
     public Estacionamento setId(UUID id) {
         this.id = id;
@@ -45,8 +45,17 @@ public class Estacionamento {
         return this;
     }
 
-    public Estacionamento setDuracao(Integer duracao) {
-        this.duracao = duracao;
+    public Estacionamento setDuracaoContratadaEmHoras(int duracao) {
+        this.duracaoContratadaEmHoras = duracao;
         return this;
+    }
+
+    public TempoDecorridoDTO calcularTempoDecorrido() {
+        LocalDateTime dataTemporaria = LocalDateTime.from(entrada);
+        LocalDateTime agora = LocalDateTime.now();
+        long horas = dataTemporaria.until(agora, ChronoUnit.HOURS);
+        long minutosTotais = dataTemporaria.until(agora, ChronoUnit.MINUTES);
+        long minutos = horas == 0 ? minutosTotais : minutosTotais % 60;
+        return new TempoDecorridoDTO(horas, minutos);
     }
 }

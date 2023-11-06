@@ -2,9 +2,9 @@ package br.com.fiap.postech.parquimetro.service;
 
 import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
 import br.com.fiap.postech.parquimetro.dominio.ValidacaoException;
-import br.com.fiap.postech.parquimetro.dominio.Veiculo;
 import br.com.fiap.postech.parquimetro.dominio.validacoes.ValidadorRegistroDeEstacionamento;
 import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoEstacionamentoDTO;
+import br.com.fiap.postech.parquimetro.dto.DadosMonitoramentoEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosRegistroEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.repository.IEstacionamentoRepository;
 import br.com.fiap.postech.parquimetro.service.exception.ControllerNotFoundException;
@@ -33,11 +33,12 @@ public class EstacionamentoService {
         return repository.findAll(paginacao);
     }
 
-    @Cacheable("estacionamentos")
-    public Estacionamento findById(UUID id) {
-        return repository
+    public DadosMonitoramentoEstacionamentoDTO findById(UUID id) {
+        Estacionamento estacionamento = repository
                 .findById(id)
                 .orElseThrow(() -> new ControllerNotFoundException("Estacionamento não encontrado"));
+
+        return new DadosMonitoramentoEstacionamentoDTO(estacionamento);
     }
 
     public DadosDetalhamentoEstacionamentoDTO registrar(DadosRegistroEstacionamentoDTO dados) {
@@ -54,7 +55,7 @@ public class EstacionamentoService {
                 new Estacionamento()
                         .setEntrada(dados.entrada())
                         .setVeiculo(veiculo)
-                        .setDuracao(dados.duracao());
+                        .setDuracaoContratadaEmHoras(dados.duracao());
 
         repository.save(estacionamento);
 
