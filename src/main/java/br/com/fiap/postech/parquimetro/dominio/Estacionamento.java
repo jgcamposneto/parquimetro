@@ -57,6 +57,10 @@ public class Estacionamento {
         return this;
     }
 
+    public boolean isContratacaoTempoFixo() {
+        return duracaoContratadaEmHoras > 0;
+    }
+
     public TempoDecorrido calcularTempoDecorrido() {
         LocalDateTime dataTemporaria = LocalDateTime.from(entrada);
         LocalDateTime agora = LocalDateTime.now();

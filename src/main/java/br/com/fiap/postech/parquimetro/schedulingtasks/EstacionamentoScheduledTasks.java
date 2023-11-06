@@ -10,19 +10,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
 @Component
-public class ScheduledTasks {
+public class EstacionamentoScheduledTasks {
 
     @Autowired
     private EstacionamentoService estacionamentoService;
 
-    private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+    private static final Logger log = LoggerFactory.getLogger(EstacionamentoScheduledTasks.class);
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -38,12 +37,11 @@ public class ScheduledTasks {
 
         List<Estacionamento> estacionamentos = estacionamentoService.consultarAtivos();
         estacionamentos.forEach(estacionamento -> {
-            int duracaoContratadaEmHoras = estacionamento.getDuracaoContratadaEmHoras();
-            if (duracaoContratadaEmHoras > 0) {
+            if (estacionamento.isContratacaoTempoFixo()) {
                 // envia notificação se a diferença entre a hora atual e o término
                 // da hora de expiração é menor do que 15 minutos.
                 LocalDateTime momentoDeExpiracao =
-                        estacionamento.getEntrada().plusHours(duracaoContratadaEmHoras);
+                        estacionamento.getEntrada().plusHours(estacionamento.getDuracaoContratadaEmHoras());
                 long diferencaMinutos = ChronoUnit.MINUTES.between(agora, momentoDeExpiracao);
                 if(diferencaMinutos < 15) {
                     log.info("Prezado " +
@@ -68,7 +66,6 @@ public class ScheduledTasks {
                 } else {
                     log.info("Nenhuma notificação a enviar.");
                 }
-
             }
         });
     }
