@@ -1,19 +1,19 @@
 package br.com.fiap.postech.parquimetro.service;
 
+import br.com.fiap.postech.parquimetro.dominio.CalculadoraDeValorDeEstacionamento;
 import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
 import br.com.fiap.postech.parquimetro.dominio.ValidacaoException;
-import br.com.fiap.postech.parquimetro.dominio.validacoes.ValidadorRegistroDeEstacionamento;
-import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoEstacionamentoDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosMonitoramentoEstacionamentoDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosRegistroEstacionamentoDTO;
+import br.com.fiap.postech.parquimetro.dominio.validacoes.IValidadorPagamentoDeEstacionamento;
+import br.com.fiap.postech.parquimetro.dto.*;
 import br.com.fiap.postech.parquimetro.repository.IEstacionamentoRepository;
 import br.com.fiap.postech.parquimetro.service.exception.ControllerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public class EstacionamentoService {
     private VeiculoService veiculoService;
 
     @Autowired
-    private List<ValidadorRegistroDeEstacionamento> validadores;
+    private List<IValidadorPagamentoDeEstacionamento> validaroresPagamento;
 
     public Page<Estacionamento> findAll(Pageable paginacao) {
         return repository.findAll(paginacao);
@@ -38,11 +38,7 @@ public class EstacionamentoService {
     }
 
     public DadosMonitoramentoEstacionamentoDTO findById(UUID id) {
-        Estacionamento estacionamento = repository
-                .findById(id)
-                .orElseThrow(() -> new ControllerNotFoundException("Estacionamento não encontrado"));
-
-        return new DadosMonitoramentoEstacionamentoDTO(estacionamento);
+        return new DadosMonitoramentoEstacionamentoDTO(buscarEstacionamento(id));
     }
 
     public DadosDetalhamentoEstacionamentoDTO registrar(DadosRegistroEstacionamentoDTO dados) {
@@ -50,21 +46,37 @@ public class EstacionamentoService {
         if(!veiculoService.existsById(dados.idVeiculo())) {
             throw new ValidacaoException("Veículo informado não está cadastrado.");
         }
-
-        validadores.forEach(v -> v.validar(dados));
-
         var veiculo = veiculoService.findById(dados.idVeiculo());
-
         var estacionamento =
                 new Estacionamento()
                         .setEntrada(dados.entrada())
                         .setVeiculo(veiculo)
                         .setDuracaoContratadaEmHoras(dados.duracao())
-                        .setAtivo(true);
-
+                        .setAtivo(true)
+                        .setPago(false);
         repository.save(estacionamento);
-
         return new DadosDetalhamentoEstacionamentoDTO(estacionamento);
+    }
 
+    @Transactional
+    public DadosDetalhamentoEstacionamentoDTO pagar(UUID id) {
+        var estacionamentoValido = buscarEstacionamento(id);
+        validaroresPagamento.forEach(v -> v.validar(estacionamentoValido));
+        estacionamentoValido.setPago(true);
+        return new DadosDetalhamentoEstacionamentoDTO(estacionamentoValido);
+    }
+
+    private Estacionamento buscarEstacionamento(UUID id) {
+        return repository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Estacionamento não encontrado"));
+    }
+
+    @Transactional
+    public DadosEncerramentoEstacionamentoDTO encerrar(UUID id) {
+        Estacionamento estacionamento = buscarEstacionamento(id);
+        CalculadoraDeValorDeEstacionamento calculadora = new CalculadoraDeValorDeEstacionamento();
+        BigDecimal valor = calculadora.calcular(estacionamento);
+        estacionamento.setValor(valor);
+        estacionamento.setAtivo(false);
+        return new DadosEncerramentoEstacionamentoDTO(valor, true);
     }
 }

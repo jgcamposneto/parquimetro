@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
@@ -32,6 +33,10 @@ public class Estacionamento {
 
     private boolean ativo;
 
+    private BigDecimal valor;
+
+    private boolean pago;
+
     public Estacionamento setId(UUID id) {
         this.id = id;
         return this;
@@ -54,6 +59,16 @@ public class Estacionamento {
 
     public Estacionamento setAtivo(boolean ativo) {
         this.ativo = ativo;
+        return this;
+    }
+
+    public Estacionamento setValor(BigDecimal valor) {
+        this.valor = valor;
+        return this;
+    }
+
+    public Estacionamento setPago(boolean pago) {
+        this.pago = pago;
         return this;
     }
 

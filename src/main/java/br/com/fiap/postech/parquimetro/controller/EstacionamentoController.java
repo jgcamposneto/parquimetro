@@ -3,6 +3,7 @@ package br.com.fiap.postech.parquimetro.controller;
 import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
 import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosMonitoramentoEstacionamentoDTO;
+import br.com.fiap.postech.parquimetro.dto.DadosPagamentoEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosRegistroEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.service.EstacionamentoService;
 import jakarta.validation.Valid;
@@ -25,7 +26,17 @@ public class EstacionamentoController {
     }
 
     @GetMapping("{id}")
-public ResponseEntity monitorar(@PathVariable UUID id) {
+    public ResponseEntity monitorar(@PathVariable UUID id) {
         return ResponseEntity.ok(estacionamentoService.findById(id));
+    }
+
+    @GetMapping("{id}/encerrar")
+    public ResponseEntity encerrar(@PathVariable UUID id) {
+        return ResponseEntity.ok(estacionamentoService.encerrar(id));
+    }
+
+    @PutMapping("{id}/pagar")
+    public ResponseEntity pagar(@PathVariable UUID id) {
+        return ResponseEntity.ok(estacionamentoService.pagar(id));
     }
 }
