@@ -35,4 +35,10 @@ public class EstacionamentoController {
     public ResponseEntity pagar(@PathVariable UUID id) {
         return ResponseEntity.ok(estacionamentoService.pagar(id));
     }
+
+    @GetMapping("{id}/emitirecibo")
+    public ResponseEntity emitirRecibo(@PathVariable UUID id) {
+        return ResponseEntity.ok(estacionamentoService.emitirRecibo(id));
+    }
+
 }

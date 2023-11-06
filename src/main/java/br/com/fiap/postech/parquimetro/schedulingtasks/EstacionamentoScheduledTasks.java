@@ -55,7 +55,7 @@ public class EstacionamentoScheduledTasks {
             } else {
                 // envia notificação se tiver completado 45 minutos de estacionamento
                 // (ou seja, faltar 15 minutos para completar a próxima hora)
-                TempoDecorrido tempoDecorrido = estacionamento.calcularTempoDecorrido();
+                TempoDecorrido tempoDecorrido = estacionamento.calcularTempoDecorrido(LocalDateTime.now());
                 if (tempoDecorrido.minutos() == 45) {
                     log.info("Prezado " +
                             estacionamento.getVeiculo().getCondutor().getNome()

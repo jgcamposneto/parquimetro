@@ -37,6 +37,8 @@ public class Estacionamento {
 
     private boolean pago;
 
+    private LocalDateTime saida;
+
     public Estacionamento setId(UUID id) {
         this.id = id;
         return this;
@@ -72,13 +74,17 @@ public class Estacionamento {
         return this;
     }
 
+    public Estacionamento setSaida(LocalDateTime saida) {
+        this.saida = saida;
+        return this;
+    }
+
     public boolean isContratacaoTempoFixo() {
         return duracaoContratadaEmHoras > 0;
     }
 
-    public TempoDecorrido calcularTempoDecorrido() {
+    public TempoDecorrido calcularTempoDecorrido(LocalDateTime agora) {
         LocalDateTime dataTemporaria = LocalDateTime.from(entrada);
-        LocalDateTime agora = LocalDateTime.now();
         long horas = dataTemporaria.until(agora, ChronoUnit.HOURS);
         long minutosTotais = dataTemporaria.until(agora, ChronoUnit.MINUTES);
         long minutos = horas == 0 ? minutosTotais : minutosTotais % 60;

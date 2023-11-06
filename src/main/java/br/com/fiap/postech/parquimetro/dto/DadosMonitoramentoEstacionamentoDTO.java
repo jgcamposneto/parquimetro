@@ -20,7 +20,7 @@ public record DadosMonitoramentoEstacionamentoDTO(
         this(estacionamento.getId(),
                 estacionamento.getEntrada(),
                 estacionamento.getDuracaoContratadaEmHoras(),
-                estacionamento.calcularTempoDecorrido(),
+                estacionamento.calcularTempoDecorrido(LocalDateTime.now()),
                 estacionamento.getVeiculo().getId(),
                 estacionamento.isAtivo(),
                 estacionamento.isPago());

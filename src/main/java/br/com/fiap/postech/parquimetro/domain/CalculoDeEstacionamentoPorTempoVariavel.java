@@ -13,9 +13,9 @@ public class CalculoDeEstacionamentoPorTempoVariavel implements ICalculoDeEstaci
     @Override
     public BigDecimal calcular(Estacionamento estacionamento) {
         if (!estacionamento.isContratacaoTempoFixo()) {
-            LocalDateTime entrada = estacionamento.getEntrada();
-            LocalDateTime agora = LocalDateTime.now();
-            long diferencaDeHoras = ChronoUnit.HOURS.between(entrada, agora);
+            var entrada = estacionamento.getEntrada();
+            var saida = estacionamento.getSaida();
+            long diferencaDeHoras = ChronoUnit.HOURS.between(entrada, saida);
             return ICalculoDeEstacionamento.TARIFA.multiply(new BigDecimal(diferencaDeHoras));
         }
         return BigDecimal.ZERO;

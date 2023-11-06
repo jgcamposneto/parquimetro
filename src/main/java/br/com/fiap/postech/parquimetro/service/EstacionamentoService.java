@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,9 +77,15 @@ public class EstacionamentoService {
     @Transactional
     public DadosEncerramentoEstacionamentoDTO encerrar(UUID id) {
         Estacionamento estacionamento = buscarEstacionamento(id);
+        estacionamento.setSaida(LocalDateTime.now());
         BigDecimal valor = calculadora.calcular(estacionamento);
         estacionamento.setValor(valor);
         estacionamento.setAtivo(false);
         return new DadosEncerramentoEstacionamentoDTO(valor, true);
+    }
+
+    public DadosReciboEstacionamentoDTO emitirRecibo(UUID id) {
+        Estacionamento estacionamento = buscarEstacionamento(id);
+        return new DadosReciboEstacionamentoDTO(estacionamento);
     }
 }
