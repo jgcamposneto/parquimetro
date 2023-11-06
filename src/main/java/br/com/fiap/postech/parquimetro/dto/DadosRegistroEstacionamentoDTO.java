@@ -12,7 +12,7 @@ public record DadosRegistroEstacionamentoDTO(
         @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
         LocalDateTime entrada,
         @Min(value = 0, message = "A duração deve ser um valor positivo")
-        int duracao,
+        int duracaoEmHoras,
         @NotNull(message = "Id do veículo deve ser informado.")
         UUID idVeiculo
 ) {

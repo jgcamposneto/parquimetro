@@ -11,7 +11,9 @@ public record DadosMonitoramentoEstacionamentoDTO(
         LocalDateTime entrada,
         int duracaoContratadaEmHoras,
         TempoDecorrido tempoDecorrido,
-        UUID idVeiculo
+        UUID idVeiculo,
+        boolean ativo,
+        boolean pago
 ) {
 
     public DadosMonitoramentoEstacionamentoDTO(Estacionamento estacionamento) {
@@ -19,7 +21,9 @@ public record DadosMonitoramentoEstacionamentoDTO(
                 estacionamento.getEntrada(),
                 estacionamento.getDuracaoContratadaEmHoras(),
                 estacionamento.calcularTempoDecorrido(),
-                estacionamento.getVeiculo().getId());
+                estacionamento.getVeiculo().getId(),
+                estacionamento.isAtivo(),
+                estacionamento.isPago());
     }
 
 }

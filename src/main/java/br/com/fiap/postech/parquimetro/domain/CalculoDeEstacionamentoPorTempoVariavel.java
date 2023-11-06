@@ -16,9 +16,8 @@ public class CalculoDeEstacionamentoPorTempoVariavel implements ICalculoDeEstaci
             LocalDateTime entrada = estacionamento.getEntrada();
             LocalDateTime agora = LocalDateTime.now();
             long diferencaDeHoras = ChronoUnit.HOURS.between(entrada, agora);
-            return new BigDecimal(diferencaDeHoras);
+            return ICalculoDeEstacionamento.TARIFA.multiply(new BigDecimal(diferencaDeHoras));
         }
         return BigDecimal.ZERO;
-
     }
 }

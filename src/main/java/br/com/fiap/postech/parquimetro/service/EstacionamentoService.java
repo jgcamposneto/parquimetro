@@ -54,7 +54,7 @@ public class EstacionamentoService {
                 new Estacionamento()
                         .setEntrada(dados.entrada())
                         .setVeiculo(veiculo)
-                        .setDuracaoContratadaEmHoras(dados.duracao())
+                        .setDuracaoContratadaEmHoras(dados.duracaoEmHoras())
                         .setAtivo(true)
                         .setPago(false);
         repository.save(estacionamento);

@@ -9,14 +9,18 @@ public record DadosDetalhamentoEstacionamentoDTO(
         UUID id,
         LocalDateTime entrada,
         int duracaoContratadaEmHoras,
-        UUID idVeiculo
+        UUID idVeiculo,
+        boolean pago,
+        boolean ativo
 ) {
 
     public DadosDetalhamentoEstacionamentoDTO(Estacionamento estacionamento) {
         this(estacionamento.getId(),
                 estacionamento.getEntrada(),
                 estacionamento.getDuracaoContratadaEmHoras(),
-                estacionamento.getVeiculo().getId());
+                estacionamento.getVeiculo().getId(),
+                estacionamento.isPago(),
+                estacionamento.isAtivo());
     }
 
 }
