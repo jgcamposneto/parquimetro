@@ -1,4 +1,4 @@
-package br.com.fiap.postech.parquimetro.dominio;
+package br.com.fiap.postech.parquimetro.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

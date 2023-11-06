@@ -1,6 +1,6 @@
 package br.com.fiap.postech.parquimetro.service;
 
-import br.com.fiap.postech.parquimetro.dominio.Veiculo;
+import br.com.fiap.postech.parquimetro.domain.Veiculo;
 import br.com.fiap.postech.parquimetro.repository.IVeiculoRepository;
 import br.com.fiap.postech.parquimetro.service.exception.ControllerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

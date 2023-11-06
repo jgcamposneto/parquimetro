@@ -1,7 +1,7 @@
 package br.com.fiap.postech.parquimetro.dto;
 
-import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
-import br.com.fiap.postech.parquimetro.dominio.TempoDecorrido;
+import br.com.fiap.postech.parquimetro.domain.Estacionamento;
+import br.com.fiap.postech.parquimetro.domain.TempoDecorrido;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

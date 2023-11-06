@@ -1,9 +1,9 @@
 package br.com.fiap.postech.parquimetro.service;
 
-import br.com.fiap.postech.parquimetro.dominio.CalculadoraDeValorDeEstacionamento;
-import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
-import br.com.fiap.postech.parquimetro.dominio.ValidacaoException;
-import br.com.fiap.postech.parquimetro.dominio.validacoes.IValidadorPagamentoDeEstacionamento;
+import br.com.fiap.postech.parquimetro.domain.CalculadoraDeValorDeEstacionamento;
+import br.com.fiap.postech.parquimetro.domain.Estacionamento;
+import br.com.fiap.postech.parquimetro.domain.exception.ValidacaoException;
+import br.com.fiap.postech.parquimetro.domain.validation.IValidadorPagamentoDeEstacionamento;
 import br.com.fiap.postech.parquimetro.dto.*;
 import br.com.fiap.postech.parquimetro.repository.IEstacionamentoRepository;
 import br.com.fiap.postech.parquimetro.service.exception.ControllerNotFoundException;
@@ -28,6 +28,9 @@ public class EstacionamentoService {
 
     @Autowired
     private List<IValidadorPagamentoDeEstacionamento> validaroresPagamento;
+
+    @Autowired
+    private CalculadoraDeValorDeEstacionamento calculadora;
 
     public Page<Estacionamento> findAll(Pageable paginacao) {
         return repository.findAll(paginacao);
@@ -73,7 +76,6 @@ public class EstacionamentoService {
     @Transactional
     public DadosEncerramentoEstacionamentoDTO encerrar(UUID id) {
         Estacionamento estacionamento = buscarEstacionamento(id);
-        CalculadoraDeValorDeEstacionamento calculadora = new CalculadoraDeValorDeEstacionamento();
         BigDecimal valor = calculadora.calcular(estacionamento);
         estacionamento.setValor(valor);
         estacionamento.setAtivo(false);

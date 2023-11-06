@@ -1,6 +1,6 @@
 package br.com.fiap.postech.parquimetro.dto;
 
-import br.com.fiap.postech.parquimetro.dominio.Veiculo;
+import br.com.fiap.postech.parquimetro.domain.Veiculo;
 
 import java.util.UUID;
 

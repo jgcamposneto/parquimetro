@@ -1,7 +1,7 @@
 package br.com.fiap.postech.parquimetro.schedulingtasks;
 
-import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
-import br.com.fiap.postech.parquimetro.dominio.TempoDecorrido;
+import br.com.fiap.postech.parquimetro.domain.Estacionamento;
+import br.com.fiap.postech.parquimetro.domain.TempoDecorrido;
 import br.com.fiap.postech.parquimetro.service.EstacionamentoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

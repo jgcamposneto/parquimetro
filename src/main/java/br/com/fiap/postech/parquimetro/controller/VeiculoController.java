@@ -2,7 +2,7 @@ package br.com.fiap.postech.parquimetro.controller;
 
 import br.com.fiap.postech.parquimetro.dto.DadosAtualizacaoVeiculoDTO;
 import br.com.fiap.postech.parquimetro.service.VeiculoService;
-import br.com.fiap.postech.parquimetro.dominio.Veiculo;
+import br.com.fiap.postech.parquimetro.domain.Veiculo;
 import br.com.fiap.postech.parquimetro.dto.DadosCadastroVeiculoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoVeiculoDTO;
 import jakarta.validation.ConstraintViolation;
@@ -46,17 +46,6 @@ public class VeiculoController {
     public ResponseEntity detalhar(@PathVariable UUID id) {
         var veiculo = veiculoService.findById(id);
         return ResponseEntity.ok(new DadosDetalhamentoVeiculoDTO(veiculo));
-    }
-
-    @PostMapping
-    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroVeiculoDTO dados, UriComponentsBuilder uriBuilder) {
-        var violacoesToMap = validar(dados);
-        if (!violacoesToMap.isEmpty())
-            return ResponseEntity.badRequest().body(violacoesToMap);
-        var veiculo = new Veiculo(dados);
-        veiculoService.save(veiculo);
-        var uri = uriBuilder.path("/{id}").buildAndExpand((veiculo.getId())).toUri();
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoVeiculoDTO(veiculo));
     }
 
     @PutMapping

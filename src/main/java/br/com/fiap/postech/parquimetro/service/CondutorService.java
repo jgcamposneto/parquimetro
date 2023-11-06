@@ -1,7 +1,7 @@
 package br.com.fiap.postech.parquimetro.service;
 
-import br.com.fiap.postech.parquimetro.dominio.Condutor;
-import br.com.fiap.postech.parquimetro.dominio.Veiculo;
+import br.com.fiap.postech.parquimetro.domain.Condutor;
+import br.com.fiap.postech.parquimetro.domain.Veiculo;
 import br.com.fiap.postech.parquimetro.dto.DadosAtualizacaoFormaPagamentoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosCadastroVeiculoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoCondutorDTO;

@@ -1,9 +1,5 @@
 package br.com.fiap.postech.parquimetro.controller;
 
-import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
-import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoEstacionamentoDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosMonitoramentoEstacionamentoDTO;
-import br.com.fiap.postech.parquimetro.dto.DadosPagamentoEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosRegistroEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.service.EstacionamentoService;
 import jakarta.validation.Valid;

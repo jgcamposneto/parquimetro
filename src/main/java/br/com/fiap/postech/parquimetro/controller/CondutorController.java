@@ -1,6 +1,6 @@
 package br.com.fiap.postech.parquimetro.controller;
 
-import br.com.fiap.postech.parquimetro.dominio.Condutor;
+import br.com.fiap.postech.parquimetro.domain.Condutor;
 import br.com.fiap.postech.parquimetro.dto.*;
 import br.com.fiap.postech.parquimetro.service.CondutorService;
 import jakarta.validation.ConstraintViolation;

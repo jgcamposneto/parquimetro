@@ -1,4 +1,4 @@
-package br.com.fiap.postech.parquimetro.dominio;
+package br.com.fiap.postech.parquimetro.domain;
 
 import br.com.fiap.postech.parquimetro.dto.DadosAtualizacaoVeiculoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosCadastroVeiculoDTO;

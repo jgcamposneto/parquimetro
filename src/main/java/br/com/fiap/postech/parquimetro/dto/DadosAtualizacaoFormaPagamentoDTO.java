@@ -1,6 +1,6 @@
 package br.com.fiap.postech.parquimetro.dto;
 
-import br.com.fiap.postech.parquimetro.dominio.FormaDePagamento;
+import br.com.fiap.postech.parquimetro.domain.FormaDePagamento;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoFormaPagamentoDTO(

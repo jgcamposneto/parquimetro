@@ -1,12 +1,12 @@
-package br.com.fiap.postech.parquimetro.dominio.validacoes;
+package br.com.fiap.postech.parquimetro.domain.validation;
 
-import br.com.fiap.postech.parquimetro.dominio.Estacionamento;
-import br.com.fiap.postech.parquimetro.dominio.FormaDePagamento;
-import br.com.fiap.postech.parquimetro.dominio.ValidacaoException;
+import br.com.fiap.postech.parquimetro.domain.Estacionamento;
+import br.com.fiap.postech.parquimetro.domain.FormaDePagamento;
+import br.com.fiap.postech.parquimetro.domain.exception.ValidacaoException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ValidadorFormaPagamentoCompativelComPeriodo implements IValidadorPagamentoDeEstacionamento {
+public class ValidadorFormaDePagamentoCompativelComPeriodo implements IValidadorPagamentoDeEstacionamento {
 
     @Override
     public void validar(Estacionamento estacionamento) {

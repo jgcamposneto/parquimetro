@@ -1,11 +1,6 @@
-package br.com.fiap.postech.parquimetro.dominio;
+package br.com.fiap.postech.parquimetro.domain;
 
 import org.junit.jupiter.api.Test;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EstacionamentoTest {
 
