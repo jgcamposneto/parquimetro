@@ -33,6 +33,10 @@ public class EstacionamentoService {
         return repository.findAll(paginacao);
     }
 
+    public List<Estacionamento> consultarAtivos() {
+        return repository.findByAtivoTrue();
+    }
+
     public DadosMonitoramentoEstacionamentoDTO findById(UUID id) {
         Estacionamento estacionamento = repository
                 .findById(id)
@@ -55,7 +59,8 @@ public class EstacionamentoService {
                 new Estacionamento()
                         .setEntrada(dados.entrada())
                         .setVeiculo(veiculo)
-                        .setDuracaoContratadaEmHoras(dados.duracao());
+                        .setDuracaoContratadaEmHoras(dados.duracao())
+                        .setAtivo(true);
 
         repository.save(estacionamento);
 
