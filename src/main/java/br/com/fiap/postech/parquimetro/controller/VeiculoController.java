@@ -1,10 +1,8 @@
 package br.com.fiap.postech.parquimetro.controller;
 
 import br.com.fiap.postech.parquimetro.dto.DadosAtualizacaoVeiculoDTO;
-import br.com.fiap.postech.parquimetro.service.VeiculoService;
-import br.com.fiap.postech.parquimetro.domain.Veiculo;
-import br.com.fiap.postech.parquimetro.dto.DadosCadastroVeiculoDTO;
 import br.com.fiap.postech.parquimetro.dto.DadosDetalhamentoVeiculoDTO;
+import br.com.fiap.postech.parquimetro.service.VeiculoService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Valid;
@@ -16,7 +14,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
 import java.util.UUID;

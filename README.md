@@ -177,3 +177,27 @@ O envio das notificações são simuladas, apenas com geração de log de envio.
 ### 7. Quando o tempo de estacionamento é encerrado, o sistema emite um recibo para o condutor.
 
 Detalhado no tópico 4.
+
+# Requisitos da solução:
+
+### 1. Utilize APIs modernas para melhorar a eficiência do sistema. Por exemplo, utilize classes e métodos da API de datas do Java para facilitar o cálculo do tempo de estaciomanento.
+- Solução:
+    - Uso da nova API de datas introduzidas no java 8.
+        - Classes `java.time.LocalDateTime`, `java.time.temporal.ChronoUnit` para armazenamento e cálculos
+do tempo.
+
+### 2. Implemente uma estrutura de persistência de dados eficiente. Utilize um banco de dados (pode ser em memória ou físico, SQL ou NoSQL), para armazenar as informações sobre os veículos estacionados. Isso permitirá um acesso rápido e confiável dos dados.
+- Solução:
+    - Utilização de banco de dados Postgresql, acessado na API através de Spring Data.
+
+### 3. Otimize os processos de gravação e leitura dos dados. Utilize técnicas para minimizar a necessidade de acesso frequente ao banco de dados. Isso ajudará a reduzir os atrasos e melhorar o desempenho geral do sistema.
+- Solução
+  - Utilização do atributo `fetch = FetchType.EAGER` nos relacionamentos `@ManyToOne` e `@OneToMany`
+das entidades JPA `Estacionamento`, `Veiculo` e `Condutor`,
+para recuperar as entidades associadas numa única consulta, evitando assim o problema dos _N+1 selects_.
+  - Utilização das interfaces `org.springframework.data.domain.Pageable` e `org.springframework.data.web.PageableDefault`
+para limitar o número de resultados de uma consulta, na listagem de `Veiculo`, obtendo assim tempo de resposta mais rápido,
+uma vez que é carregado um número menor de dados.
+  - Utilização das anotações `org.springframework.cache.annotation.EnableCaching` e `org.springframework.cache.annotation.Cacheable` para
+permitir que a aplicação processe anotações de cache e para que a consulta de `Veículo` por `id` fique em cache uma vez que os
+dados de um veículo (como a placa, por exemplo) quando não mudam com frequência (alteração da lei, por exemplo).
