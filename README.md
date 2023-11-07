@@ -199,5 +199,6 @@ para recuperar as entidades associadas numa única consulta, evitando assim o pr
 para limitar o número de resultados de uma consulta, na listagem de `Veiculo`, obtendo assim tempo de resposta mais rápido,
 uma vez que é carregado um número menor de dados.
   - Utilização das anotações `org.springframework.cache.annotation.EnableCaching` e `org.springframework.cache.annotation.Cacheable` para
-permitir que a aplicação processe anotações de cache e para que a consulta de `Veículo` por `id` fique em cache uma vez que os
+permitir que a aplicação processe anotações de cache e para que a consulta de `Veículo` por `id` fique em cache
+(armazenada em memória, para acesso mais rápido) uma vez que os
 dados de um veículo (como a placa, por exemplo) quando não mudam com frequência (alteração da lei, por exemplo).
