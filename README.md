@@ -232,3 +232,10 @@ dados de um veículo (como a placa, por exemplo) quando não mudam com frequênc
 (aplicação [Gateway](https://github.com/jgcamposneto/gateway)) e balanceamento de carga com escalabilidade horizontal.
 A aplicação passa a responder pela url localhost:8082/parquimetro-app/, e em cada chamada é feito
 o balanceamento coforme a configuração final abaixo:
+
+**Instances currently registered with Eureka**
+___
+| Application |	AMIs |	Availability Zones |	Status |
+| ----------- | ---- | ------------------ | ------ |
+| GATEWAY | 	n/a(1) | (1) |	UP (1) - 192.168.68.126:gateway:8082 |
+| PARQUIMETRO-APP |	n/a(2) |	(2) | UP (2) - parquimetro-app: -977777037 , parquimetro-app: 1447137862|
