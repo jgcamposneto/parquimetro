@@ -1,3 +1,26 @@
+# Parquímetro
+
+## O que é este projeto?
+
+Este é um projeto para a fase 3 do Tech Challenge da Postech/FIAP de Arquitetura de Desenvolvimento Java.
+O objetivo principal é refazer uma solução de parquímetros, que atualmente apresenta atrasos
+e erros na gravação e leitura dos dados.
+
+## O que eu devo configurar?
+
+Este projeto implementa uma API Rest com Spring Boot.
+Na máquina é preciso ter instalado:
+* java versão 17
+* maven
+* banco de dados Postgresql
+
+## Como executar este projeto?
+
+Este projeto foi construído com Spring Boot e pode ser executado através do comando:
+```bash
+mvn spring-boot:run
+```
+
 # Fluxo de trabalho
 
 ### 1. **O condutor se registra no sistema, fornecendo informações pessoais.**
@@ -205,5 +228,7 @@ dados de um veículo (como a placa, por exemplo) quando não mudam com frequênc
     
 ### Considere a escalabilidade do sistema. Embora o desafio não exija a implementação de um sistema distribuído, é importante projetar a solução de forma que ela possa lidar com um grande volume de dados e ser facilmente escalável no futuro.
 - Solução
-  - Utilização do serviço Netflix Eureka para Registry e Discovery, utilização de Api Gateway com Spring Cloud Gateway
-e balanceamento de carga com escalabilidade horizontal
+  - Utilização do serviço Netflix Eureka para Registry e Discovery (aplicação [Server](https://github.com/jgcamposneto/server)), utilização de Api Gateway com Spring Cloud Gateway
+(aplicação [Gateway](https://github.com/jgcamposneto/gateway)) e balanceamento de carga com escalabilidade horizontal.
+A aplicação passa a responder pela url localhost:8082/parquimetro-app/, e em cada chamada é feito
+o balanceamento coforme a configuração final abaixo:
