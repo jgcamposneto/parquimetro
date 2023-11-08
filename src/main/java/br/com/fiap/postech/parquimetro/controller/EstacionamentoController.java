@@ -4,6 +4,7 @@ import br.com.fiap.postech.parquimetro.dto.DadosRegistroEstacionamentoDTO;
 import br.com.fiap.postech.parquimetro.service.EstacionamentoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,4 +42,8 @@ public class EstacionamentoController {
         return ResponseEntity.ok(estacionamentoService.emitirRecibo(id));
     }
 
+    @GetMapping("/porta")
+    public String retornaPorta(@Value("${local.server.port}") String porta) {
+        return String.format("Requisição na porta %s", porta);
+    }
 }

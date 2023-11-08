@@ -8,6 +8,7 @@ import jakarta.validation.Path;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -58,6 +59,11 @@ public class CondutorController {
         return violacoes
                 .stream()
                 .collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
+    }
+
+    @GetMapping("/porta")
+    public String retornaPorta(@Value("${local.server.port}") String porta) {
+        return String.format("Requisição na porta %s", porta);
     }
 
 }

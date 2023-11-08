@@ -180,17 +180,17 @@ Detalhado no tópico 4.
 
 # Requisitos da solução:
 
-### 1. Utilize APIs modernas para melhorar a eficiência do sistema. Por exemplo, utilize classes e métodos da API de datas do Java para facilitar o cálculo do tempo de estaciomanento.
+### Utilize APIs modernas para melhorar a eficiência do sistema. Por exemplo, utilize classes e métodos da API de datas do Java para facilitar o cálculo do tempo de estaciomanento.
 - Solução:
     - Uso da nova API de datas introduzidas no java 8.
         - Classes `java.time.LocalDateTime`, `java.time.temporal.ChronoUnit` para armazenamento e cálculos
 do tempo.
 
-### 2. Implemente uma estrutura de persistência de dados eficiente. Utilize um banco de dados (pode ser em memória ou físico, SQL ou NoSQL), para armazenar as informações sobre os veículos estacionados. Isso permitirá um acesso rápido e confiável dos dados.
+### Implemente uma estrutura de persistência de dados eficiente. Utilize um banco de dados (pode ser em memória ou físico, SQL ou NoSQL), para armazenar as informações sobre os veículos estacionados. Isso permitirá um acesso rápido e confiável dos dados.
 - Solução:
     - Utilização de banco de dados Postgresql, acessado na API através de Spring Data.
 
-### 3. Otimize os processos de gravação e leitura dos dados. Utilize técnicas para minimizar a necessidade de acesso frequente ao banco de dados. Isso ajudará a reduzir os atrasos e melhorar o desempenho geral do sistema.
+### Otimize os processos de gravação e leitura dos dados. Utilize técnicas para minimizar a necessidade de acesso frequente ao banco de dados. Isso ajudará a reduzir os atrasos e melhorar o desempenho geral do sistema.
 - Solução
   - Utilização do atributo `fetch = FetchType.EAGER` nos relacionamentos `@ManyToOne` e `@OneToMany`
 das entidades JPA `Estacionamento`, `Veiculo` e `Condutor`,
@@ -202,3 +202,8 @@ uma vez que é carregado um número menor de dados.
 permitir que a aplicação processe anotações de cache e para que a consulta de `Veículo` por `id` fique em cache
 (armazenada em memória, para acesso mais rápido) uma vez que os
 dados de um veículo (como a placa, por exemplo) quando não mudam com frequência (alteração da lei, por exemplo).
+    
+### Considere a escalabilidade do sistema. Embora o desafio não exija a implementação de um sistema distribuído, é importante projetar a solução de forma que ela possa lidar com um grande volume de dados e ser facilmente escalável no futuro.
+- Solução
+  - Utilização do serviço Netflix Eureka para Registry e Discovery, utilização de Api Gateway com Spring Cloud Gateway
+e balanceamento de carga com escalabilidade horizontal

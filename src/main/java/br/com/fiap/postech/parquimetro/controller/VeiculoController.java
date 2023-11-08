@@ -8,6 +8,7 @@ import jakarta.validation.Path;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -68,6 +69,11 @@ public class VeiculoController {
         return violacoes
                 .stream()
                 .collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
+    }
+
+    @GetMapping("/porta")
+    public String retornaPorta(@Value("${local.server.port}") String porta) {
+        return String.format("Requisição na porta %s", porta);
     }
 
 }
