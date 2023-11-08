@@ -201,7 +201,7 @@ O envio das notificações são simuladas, apenas com geração de log de envio.
 
 Detalhado no tópico 4.
 
-# Requisitos da solução:
+# Requisitos da solução
 
 ### Utilize APIs modernas para melhorar a eficiência do sistema. Por exemplo, utilize classes e métodos da API de datas do Java para facilitar o cálculo do tempo de estaciomanento.
 - Solução:
